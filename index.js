@@ -5,14 +5,16 @@ const {
   addContact,
 } = require('./contacts');
 
-const argsObject = yargs(hideBin(process.argv)).argv;
+const yargs = require('yargs/yargs');
+const { hideBin } = require('yargs/helpers');
+const argv = yargs(hideBin(process.argv)).argv;
 
 async function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case 'list':
       return console.table(listContacts());
       break;
-
+    case 'get':
       return console.log(getContactById(id));
       break;
 
@@ -29,4 +31,4 @@ async function invokeAction({ action, id, name, email, phone }) {
   }
 }
 
-invokeAction(argsObject);
+invokeAction(argv);

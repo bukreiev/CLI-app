@@ -3,14 +3,13 @@
     "commander": "^10.0.1",
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "nanoid": "^4.0.2",
+    "uuid": "^9.0.0",
     "yargs": "^17.7.2"
   },
   "name": "cli-app",
   "description": "node-js-homework",
   "version": "1.0.0",
   "main": "index.js",
-
   "scripts": {
     "test": "test",
     "start": "node index",
