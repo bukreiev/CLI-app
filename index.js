@@ -5,9 +5,18 @@ const {
   addContact,
 } = require('./contacts');
 
-const yargs = require('yargs/yargs');
-const { hideBin } = require('yargs/helpers');
-const argv = yargs(hideBin(process.argv)).argv;
+const { Command } = require('commander');
+const program = new Command();
+program
+  .option('-a, --action <type>', 'choose action')
+  .option('-i, --id <type>', 'user id')
+  .option('-n, --name <type>', 'user name')
+  .option('-e, --email <type>', 'user email')
+  .option('-p, --phone <type>', 'user phone');
+
+program.parse(process.argv);
+
+const argv = program.opts();
 
 async function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
@@ -15,15 +24,15 @@ async function invokeAction({ action, id, name, email, phone }) {
       return console.table(listContacts());
       break;
     case 'get':
-      return console.log(getContactById(id));
+      return console.table(getContactById(id));
       break;
 
     case 'add':
-      return console.log(addContact(name, email, phone));
+      return console.table(addContact(name, email, phone));
       break;
 
     case 'remove':
-      return console.log(removeContact(id));
+      return console.table(removeContact(id));
       break;
 
     default:
